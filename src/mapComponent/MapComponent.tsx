@@ -39,7 +39,7 @@ const officeMark: MarkerData = {
 const MapComponent: React.FC = () => {
   const [markers, setMarkers] = useState<MarkerData[]>([]);
 
-  const addMarker = async (newMarker: Omit<MarkerData, 'id'>) => {
+  const addMarker = async (newMarker: FirestoreMarkerData) => {
     try {
       const docRef = await addDoc(colRef, newMarker);
       console.log(`Marker added with ID: ${docRef.id}`);
@@ -116,7 +116,7 @@ const MapComponent: React.FC = () => {
 
   let markersCounter = markers.length;
 
-  const MyComponent: React.FC<{ addMarker: (newMarker: Omit<MarkerData, 'id'>) => void }> = ({ addMarker }) => {
+  const MyComponent: React.FC<{ addMarker: (newMarker: FirestoreMarkerData) => void }> = ({ addMarker }) => {
     useMapEvents({
       click: (e) => {
         markersCounter++;
