@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/quest-marker-app/static/css/main.67bac5d6.css",
-    "main.js": "/quest-marker-app/static/js/main.df381e5b.js",
-    "static/js/787.01635c8d.chunk.js": "/quest-marker-app/static/js/787.01635c8d.chunk.js",
-    "index.html": "/quest-marker-app/index.html",
-    "main.67bac5d6.css.map": "/quest-marker-app/static/css/main.67bac5d6.css.map",
-    "main.df381e5b.js.map": "/quest-marker-app/static/js/main.df381e5b.js.map",
-    "787.01635c8d.chunk.js.map": "/quest-marker-app/static/js/787.01635c8d.chunk.js.map"
+    "main.css": "./static/css/main.67bac5d6.css",
+    "main.js": "./static/js/main.85608e15.js",
+    "static/js/787.01635c8d.chunk.js": "./static/js/787.01635c8d.chunk.js",
+    "index.html": "./index.html",
+    "main.67bac5d6.css.map": "./static/css/main.67bac5d6.css.map",
+    "main.85608e15.js.map": "./static/js/main.85608e15.js.map",
+    "787.01635c8d.chunk.js.map": "./static/js/787.01635c8d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.67bac5d6.css",
-    "static/js/main.df381e5b.js"
+    "static/js/main.85608e15.js"
   ]
 }
