@@ -119,6 +119,44 @@ const MapComponent: React.FC = () => {
     }
   };
 
+  const handleMarkerContextMenu = (marker: MarkerData) => {
+    // Змінюємо тип маркера на основі поточного типу
+    const newType = getNextMarkerType(marker.type);
+    
+    // Оновлюємо маркер з новим типом в Firestore та стані компонента
+    updateMarkerType(marker.id, newType);
+  };
+  
+  const getNextMarkerType = (currentType: string): string => {
+    switch (currentType) {
+      case 'base':
+        return 'home';
+      case 'home':
+        return 'bar';
+      case 'bar':
+        return 'base';
+      default:
+        return 'base';
+    }
+  };
+  
+  const updateMarkerType = async (markerId: string, newType: string) => {
+    try {
+      await updateDoc(doc(markersCollection, markerId), { type: newType });
+  
+      // Оновлюємо стан маркерів в React
+      setMarkers((prevMarkers) =>
+        prevMarkers.map((marker) =>
+          marker.id === markerId ? { ...marker, type: newType } : marker
+        )
+      );
+  
+      console.log(`Marker with ID ${markerId} type updated to ${newType} in Firestore`);
+    } catch (error) {
+      console.error('Error updating marker type in Firestore: ', error);
+    }
+  };  
+
   // отримання даних при завантаженні сторінки
   useEffect(() => {
     const fetchMarkers = async () => {
@@ -159,6 +197,21 @@ const MapComponent: React.FC = () => {
         });
         console.log(markers);
       },
+      // на пкм змінюємо тип маркера
+      contextmenu: (e) => {
+        setSelectedType((prevType) => {
+          switch (prevType) {
+            case 'base':
+              return 'home';
+            case 'home':
+              return 'bar';
+            case 'bar':
+              return 'base';
+            default:
+              return 'base';
+          }
+        });
+      },
     });
 
     return null;
@@ -193,7 +246,7 @@ const MapComponent: React.FC = () => {
             draggable={true}
             eventHandlers={{
               click: () => removeMarker(marker),
-              contextmenu: () => console.log('sasi'),
+              contextmenu: (e) => handleMarkerContextMenu(marker),
               dragend: (e) =>
                 updateMarkerDebounced({
                   ...marker,
